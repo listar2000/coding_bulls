@@ -1,14 +1,20 @@
+<ol class="breadcrumb">
+  <li><a>Platform</a></li>
+  <li class="active">Posts</li>
+</ol>
+
 <% @posts.each do |post| %>
   <div class="panel <%= cycle('panel-success', 'panel-info', 'panel-warning', 'panel-danger') -%>">
     <div class="panel-heading">
       <h3 class="panel-title"><%= post.caption %></h3>
     </div>
     <div class="panel-body">
-      <%= post.content %>
+      <p><%= post.content.lines.first %></p>
       <br>
-      <%= link_to 'Show', post %>
-      <%= link_to 'Edit', edit_post_path(post) %>
-      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+      <%= link_to 'Show', post, class: "btn btn-info" %>
+      <%= link_to 'Edit', edit_post_path(post), class: "btn btn-warning" %>
+      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
     </div>
   </div>
 <% end %>
