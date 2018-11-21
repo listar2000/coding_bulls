@@ -12,11 +12,14 @@
     <% @post.content.lines.each do |line| %>
       <p><%= line %></p>
     <% end %>
+
+    <% if not @post.image.attachment.nil? %>
+      <%= image_tag @post.image, style: 'max-width: 500px' %>
+    <% end %>
+
     <br>
 
     <%= link_to 'Edit', edit_post_path(@post) %> |
     <%= link_to 'Back', posts_path %>
   </div>
 </div>
-
-

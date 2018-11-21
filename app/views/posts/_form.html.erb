@@ -11,17 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :caption %>
-    <%= form.text_area :caption %>
+  <div class="input-group new-post-field">
+    <span class="input-group-addon" id="basic-addon1">Caption</span>
+    <%= form.text_field :caption, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+  <div class="input-group new-post-field">
+    <span class="input-group-addon" id="basic-addon1">Content</span>
+    <%= form.text_area :content, class: "form-control" %>
+  </div>
+
+  <div class="new-post-field">
+    <span class="input-group-addon" id="basic-addon1">Choose File</span>
+    <%= form.file_field :image, accept: "image/png,image/gif,image/jpeg", class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.button :submit, class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+<style>
+  .new-post-field {
+    margin-bottom: 12px;
+  }
+</style>
