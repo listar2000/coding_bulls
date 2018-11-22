@@ -246,13 +246,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-<<<<<<< HEAD
   autoprefixer-rails
   aws-sdk-s3
-  bcrypt (~> 3.1.7)
-=======
   bcrypt (~> 3.1.12)
->>>>>>> 740a420edb83670f2491e0a6ec749a637216416d
   bootsnap (>= 1.1.0)
   bootstrap-sass
   byebug
