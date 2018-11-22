@@ -32,7 +32,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 gem 'devise'
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.12'
 
 gem 'aws-sdk-s3'
 
@@ -44,7 +44,6 @@ gem 'aws-sdk-s3'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-gem "paperclip", "~> 6.0.0"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
