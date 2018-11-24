@@ -3,6 +3,12 @@
   <li class="active">Posts</li>
 </ol>
 
+<% flash.each do |key, value| %>
+  <div class="<%= flash_class(key) %>">
+      <%= value %>
+  </div>
+<% end %>
+
 <% @posts.each do |post| %>
   <div class="panel <%= cycle('panel-success', 'panel-info', 'panel-warning', 'panel-danger') -%>">
     <div class="panel-heading">
@@ -13,8 +19,11 @@
       <br>
 
       <%= link_to 'Show', post, class: "btn btn-info" %>
-      <%= link_to 'Edit', edit_post_path(post), class: "btn btn-warning" %>
-      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
+
+      <% if user_signed_in? && post.user == current_user %>
+        <%= link_to 'Edit', edit_post_path(post), class: "btn btn-warning" %>
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure to delete?' }, class: "btn btn-danger"%>
+      <% end %>
     </div>
   </div>
 <% end %>

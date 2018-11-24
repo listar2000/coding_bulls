@@ -1,0 +1,7 @@
+<% @users.each do |user| %>
+    <% if user.name %>
+        <p><%= user.name %></p>
+    <% else %>
+        <p><%= user.email %></p>
+    <% end %>
+<% end %>

@@ -18,7 +18,7 @@
 
   <div class="input-group new-post-field">
     <span class="input-group-addon" id="basic-addon1">Content</span>
-    <%= form.text_area :content, class: "form-control" %>
+    <%= form.text_area :content, class: "form-control", id: "content-form" %>
   </div>
 
   <div class="new-post-field">
@@ -35,4 +35,28 @@
   .new-post-field {
     margin-bottom: 12px;
   }
+
+  textarea {
+    /* margin:0px 0px; this is redundant anyways since its specified below*/
+    padding-top:10px;
+    padding-bottom:25px; /* increased! */
+    /* height:16px; */
+    /* line-height:16px; */
+    width:100%; /* changed from 96 to 100% */
+    display:block;
+    /* margin:0px auto; not needed since i have width 100% now */
+  }
 </style>
+
+
+
+<script>
+  function expandTextarea() {
+      document.getElementById('content-form').addEventListener('keyup', function() {
+          this.style.overflow = 'hidden';
+          this.style.height = 0;
+          this.style.height = this.scrollHeight + 'px';
+      }, false);
+  }
+  expandTextarea();
+</script>

@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit]
 
   # GET /posts
   # GET /posts.json
@@ -19,6 +20,10 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    if @post.user != current_user
+      flash[:error] = 'Cannot edit other user\'s posts'
+      redirect_to root_path
+    end
   end
 
   # POST /posts
@@ -29,7 +34,10 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { 
+          flash[:success] = 'Post was successfully created.'
+          redirect_to @post 
+        }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -60,6 +68,10 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def all_users
+    @users = User.all
   end
 
   private
