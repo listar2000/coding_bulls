@@ -3,8 +3,8 @@
     <div class="navbar-header">
       <%= link_to 'All Posts', root_path, class: "navbar-brand"%>
       <% if user_signed_in? %>
-        <a class="navbar-brand" href="#">
-          <%= current_user.email %>
+        <a class="navbar-brand" href=".../dashboard.html.erb">
+          <%= current_user.name %>
         </a>
         <%= link_to 'Log out', destroy_user_session_path, class: "btn btn-primary", method: :delete %>
       <% else %>
