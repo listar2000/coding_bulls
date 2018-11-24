@@ -12,8 +12,13 @@
  *
  */
  @import "bootstrap-sprockets";
- @import 'bootstrap' ;
+ @import 'bootstrap';
 
  .container {
-     padding-bottom: 30px;
+    padding-bottom: 30px;
  }
+
+textarea {
+    resize: both;
+    overflow: auto;
+}
