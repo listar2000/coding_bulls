@@ -19,11 +19,11 @@
       <br>
 
       <%= link_to 'Show', post, class: "btn btn-info" %>
-
       <% if user_signed_in? && post.user == current_user %>
         <%= link_to 'Edit', edit_post_path(post), class: "btn btn-warning" %>
         <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure you want to delete?' }, class: "btn btn-danger"%>
       <% end %>
+      <%= link_to 'Add to Dashboard', post, class: "btn btn-success" %>
     </div>
   </div>
 <% end %>
