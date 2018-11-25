@@ -4,6 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :posts
-  has_many :me_follow, :class_name => 'Follow', :foreign_key => 'followed_id'
-  has_many :follow_me, :class_name => 'Follow', :foreign_key => 'follower_id'
+  has_many :follow_me, :class_name => 'Follow', :foreign_key => 'followed_id'
+  has_many :me_follow, :class_name => 'Follow', :foreign_key => 'follower_id'
 end
