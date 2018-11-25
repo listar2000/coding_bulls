@@ -7,6 +7,7 @@
           <%= current_user.name %>
         </a>
         <%= link_to 'Log out', destroy_user_session_path, class: "btn btn-primary", method: :delete %>
+        <%= link_to 'My Followers', all_followers_path(current_user.id), class: "navbar-brand" %>
       <% else %>
         <%= link_to 'Sign in', new_user_session_path, class: "btn btn-primary" %>
       <% end %>

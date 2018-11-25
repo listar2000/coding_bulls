@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
     def all_users
         @users = User.all
-        redirect_to 
     end
 
     def follow
@@ -13,5 +12,9 @@ class UsersController < ApplicationController
             Follow.create(follower: current_user, followed: @followed)
             redirect_to posts_path
         end
+    end
+
+    def all_followers
+        @followships = User.find(params[:id]).follow_me
     end
 end

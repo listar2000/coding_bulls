@@ -1,0 +1,4 @@
+<% @followships.each do | followship | %>
+    <% follower = User.find(followship.follower_id) %>
+    <%= follower.name   %>
+<% end %>
