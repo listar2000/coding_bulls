@@ -3,7 +3,9 @@
 <head>
 <style>
 body { 
-  background: image-url('file:///C:/Users/nishith/Desktop/coding_bulls/app/views/welcome/Dashboard.png'); 
+  background-image: url("/assets/Dashboard.png");
+  background-repeat: no-repeat;
+  background-size: 100%; 
 }
 
 h1 {
@@ -36,9 +38,23 @@ h1 {
 }
 </style>
 </head>
-<body>				  
+<body background="">				  
 <div>
-<h1> Welcome! Priyans </h1>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br> 
+	<br> 
+	<br>
+	<br>
+	<% if user_signed_in? %>
+		<h1> Welcome! <%= current_user.name %> </h1>
+	<% else %>
+		<h1> Welcome! Sign-in to access the desired services </h1>
+	<% end %>
 </div>	
 </body>
 </html>
