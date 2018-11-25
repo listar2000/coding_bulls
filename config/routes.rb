@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   resources :posts
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  get "all_users", to: "posts#all_users", as: "all_users"
-  get "all_posts", to: "posts#index", as: "all_posts"
-  root :to => 'welcome#index'
+  # the followed are routes for the user_controller
+  get "all_users", to: "users#all_users", as: "all_users"
+  patch "/users/:id/like", to: "users#follow", as: "follow"
   
+  root :to => 'welcome#index'
 end
