@@ -9,6 +9,7 @@ class UsersController < ApplicationController
             flash[:error] = "You cannot follow yourself!"
             redirect_to posts_path
         else
+            flash[:success] = "You have successfully followed #{@followed.name}" 
             Follow.create(follower: current_user, followed: @followed)
             redirect_to posts_path
         end
