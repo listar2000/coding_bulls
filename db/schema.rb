@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2018_11_26_065409) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.index ["user_id"], name: "index_categories_on_user_id"
+    t.index ["user_id"], name: "indaex_categories_on_user_id"
   end
 
   create_table "follows", force: :cascade do |t|

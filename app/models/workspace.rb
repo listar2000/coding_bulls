@@ -1,2 +1,0 @@
-class Workspace < ApplicationRecord
-end
