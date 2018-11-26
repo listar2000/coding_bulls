@@ -1,16 +1,14 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
-    def index
-      @posts = Post.all
-      @posts = @posts.where(user_id: params[:user_id]) if params[:user_id].present?
-      @posts = @posts.where("content like '%#{params[:query]}%'") if params[:query].present?
-      @posts = @posts.where(category: params[:category]) if params[:category].present?
-    end
+    @posts = Post.all
+    @posts = @posts.where(user_id: params[:user_id]) if params[:user_id].present?
+    @posts = @posts.where("content like '%#{params[:query]}%'") if params[:query].present?
+    @posts = @posts.where(category: params[:category]) if params[:category].present?
   end
 
   # GET /posts/1

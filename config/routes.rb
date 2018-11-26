@@ -11,5 +11,12 @@ Rails.application.routes.draw do
   get "/users/:id/all_followers", to: "users#all_followers", as: "all_followers"
   get "/users/:id/dashboard", to: "users#dashboard", as: "user_dashboard"
 
+  # the routes for category_controller
+  get "/categories", to: "categories#index", as: "categories"
+  get "/categories/:id", to: "categories#show", as: "category"
+  post "/categories", to: "categories#create", as: "create_category"
+  patch "/category/:id", to: "categories#update", as: "update_category"
+  delete "/category/:id", to: "categories#destroy", as: "destroy_category"
+
   root :to => 'welcome#index'
 end

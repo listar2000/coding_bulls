@@ -1,0 +1,19 @@
+<ol class="breadcrumb">
+  <li><a>Platform</a></li>
+  <li class="active">Categories</li>
+  <% request.query_parameters.each do |key, value| %>
+    <li class="active"><%= key %> => <%= value %></li>
+  <% end %>
+</ol>
+
+<% flash.each do |key, value| %>
+  <div class="<%= flash_class(key) %>">
+      <%= value %>
+  </div>
+<% end %>
+
+<% @categories.each do |category| %>
+    <span class="label <%= cycle('label-success', 'label-info', 'label-warning', 'label-danger') -%>">
+        <%= category.name %>
+    </span>
+<% end %>
