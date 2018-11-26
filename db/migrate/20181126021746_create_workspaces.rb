@@ -1,6 +1,6 @@
-class CreateDashboards < ActiveRecord::Migration[5.2]
+class CreateWorkspaces < ActiveRecord::Migration[5.2]
   def change
-    create_table :dashboards do |t|
+    create_table :workspaces do |t|
       t.text :caption
       t.text :link
 
