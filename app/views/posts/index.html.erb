@@ -32,4 +32,15 @@
   </div>
 <% end %>
 
+<% if @posts.count == 0 %>
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title">No Post Can be Found, Sry...</h3>
+    </div>
+    <div class="panel-body">
+      <p>Based on your query, there's no related post in our system.</p>
+    </div>
+  </div>
+<% end %>
+
 <%= link_to 'New Post', new_post_path, class: "btn btn-primary" %>

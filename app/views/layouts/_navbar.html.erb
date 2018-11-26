@@ -2,16 +2,30 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <%= link_to 'All Posts', posts_path, class: "navbar-brand"%>
-      <% if user_signed_in? %>
-        <a class="navbar-brand" href=".../dashboard.html.erb">
-          <%= current_user.name %>
-        </a>
-        <%= link_to 'Log out', destroy_user_session_path, class: "btn btn-primary", method: :delete %>
-        <%= link_to 'My Followers', all_followers_path(current_user.id), class: "navbar-brand" %>
-      <% else %>
-        <%= link_to 'Sign in', new_user_session_path, class: "btn btn-primary" %>
-      <% end %>
-      <%= link_to 'All Users', all_users_path, class: "navbar-brand" %>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-left">
+          <%= link_to 'All Users', all_users_path, class: "navbar-brand" %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <div class="btn-group navbar-btn">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="glyphicon glyphicon-user"></span>
+                <%= current_user.name %>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'My Followers', all_followers_path(current_user.id) %></li>
+              <li><%= link_to 'My Posts', posts_path(user_id: current_user.id) %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </div>
+        <% else %>
+          <%= link_to 'Sign in', new_user_session_path, class: "btn btn-success navbar-btn" %>
+        <% end %>
+      </ul>
     </div>
   </div>
 </nav>
@@ -23,5 +37,9 @@
 }
 .navbar-default .navbar-brand {
   color: white;
+}
+.navbar-btn {
+  margin-top: 7px;
+  margin-right: 15px;
 }
 </style>
