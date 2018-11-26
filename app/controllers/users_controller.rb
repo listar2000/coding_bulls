@@ -16,9 +16,28 @@ class UsersController < ApplicationController
     end
 
     def dashboard
+        @workspace = Workspace.new(workspace_params)
+        @workspace.user_id = current_user.id
+    
+        respond_to do |format|
+            if @workspace.save
+                format.html { 
+                    flash[:success] = 'This post was successfull added to your Dashboard'
+                    redirect_to #dashboard_path
+                }
+                format.json { render :show, status: :created, location: @workspace }
+            else
+                format.html { render :new }
+                format.json { render json: @workspace.errors, status: :unprocessable_entity }
+            end
+        end
     end
 
     def all_followers
         @followships = User.find(params[:id]).follow_me
+    end
+
+    def workspace_params
+        params.require(:workspace).permit(:caption, :link, :user_id)
     end
 end
