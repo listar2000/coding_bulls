@@ -15,6 +15,9 @@ class UsersController < ApplicationController
         end
     end
 
+    def dashboard
+    end
+
     def all_followers
         @followships = User.find(params[:id]).follow_me
     end
