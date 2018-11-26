@@ -23,7 +23,7 @@ class UsersController < ApplicationController
             if @workspace.save
                 format.html { 
                     flash[:success] = 'This post was successfull added to your Dashboard'
-                    redirect_to #dashboard_path
+                    redirect_to dashboard_path
                 }
                 format.json { render :show, status: :created, location: @workspace }
             else

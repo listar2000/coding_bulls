@@ -1,8 +1,8 @@
 <ol class="breadcrumb">
   <li><a>Platform</a></li>
   <li class="active">Posts</li>
-  <% request.query_parameters.each do |key, value| %>
-    <li class="active"><%= key %> => <%= value %></li>
+  <% if request.query_parameters.present? %>
+    <li class="active">Search results</li>
   <% end %>
 </ol>
 
@@ -12,7 +12,20 @@
   </div>
 <% end %>
 
-<% if @posts == nil %>
+<div class="row search-banner">
+  <div class="col-lg-5 ">
+    <%= form_with url: "/posts", method: 'get', local: true do |form| %>
+      <div class="input-group">
+        <%= form.text_field :query, class: "form-control", placeholder: "Search for..." %>
+        <span class="input-group-btn">
+          <%= form.button :submit, class: "btn btn-default"%>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% if @posts.count == 0 %>
   <div class="panel panel-danger">
     <div class="panel-heading">
       <h3 class="panel-title">No Post Can be Found, Sorry...</h3>
@@ -46,3 +59,9 @@
   <% end %>
 <% end %>
 <%= link_to 'New Post', new_post_path, class: "btn btn-primary" %>
+
+<style>
+.search-banner {
+    margin-bottom: 13px
+}
+</style>
