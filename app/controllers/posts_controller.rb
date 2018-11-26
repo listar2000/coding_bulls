@@ -5,10 +5,11 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    if params[:user_id].present?
-      @posts = Post.where(user_id: params[:user_id])
-    else
+    def index
       @posts = Post.all
+      @posts = @posts.where(user_id: params[:user_id]) if params[:user_id].present?
+      @posts = @posts.where("content like '%#{params[:query]}%'") if params[:query].present?
+      @posts = @posts.where(category: params[:category]) if params[:category].present?
     end
   end
 

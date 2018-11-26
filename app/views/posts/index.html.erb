@@ -1,34 +1,14 @@
 <ol class="breadcrumb">
   <li><a>Platform</a></li>
   <li class="active">Posts</li>
+  <% request.query_parameters.each do |key, value| %>
+    <li class="active"><%= key %> => <%= value %></li>
+  <% end %>
 </ol>
 
 <% flash.each do |key, value| %>
   <div class="<%= flash_class(key) %>">
       <%= value %>
-  </div>
-<% end %>
-
-<% @posts.each do |post| %>
-  <div class="panel <%= cycle('panel-success', 'panel-info', 'panel-warning', 'panel-danger') -%>">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= post.caption %></h3>
-    </div>
-    <div class="panel-body">
-      <p><%= post.content.lines.first %></p>
-      <h5><%= post.category %></h5>
-      <br>
-
-      <%= link_to 'Show', post, class: "btn btn-info" %>
-      <% if user_signed_in? %>
-        <% if post.user == current_user %>
-          <%= link_to 'Edit', edit_post_path(post), class: "btn btn-success" %>
-          <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure you want to delete?' }, class: "btn btn-danger"%>
-        <% end %>
-        <%= link_to 'Follow User', follow_path(post.user_id), class: "btn btn-warning", method: :patch%>
-      <% end %>
-      <%= link_to 'Add to Dashboard', post, class: "btn btn-success" %>
-    </div>
   </div>
 <% end %>
 
@@ -41,6 +21,28 @@
       <p>Based on your query, there's no related post in our system.</p>
     </div>
   </div>
-<% end %>
+<% else %>
+  <% @posts.each do |post| %>
+    <div class="panel <%= cycle('panel-success', 'panel-info', 'panel-warning', 'panel-danger') -%>">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= post.caption %></h3>
+      </div>
+      <div class="panel-body">
+        <p><%= post.content.lines.first %></p>
+        <h5><%= post.category %></h5>
+        <br>
 
+        <%= link_to 'Show', post, class: "btn btn-info" %>
+        <% if user_signed_in? %>
+          <% if post.user == current_user %>
+            <%= link_to 'Edit', edit_post_path(post), class: "btn btn-success" %>
+            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure you want to delete?' }, class: "btn btn-danger"%>
+          <% end %>
+          <%= link_to 'Follow User', follow_path(post.user_id), class: "btn btn-warning", method: :patch%>
+        <% end %>
+        <%= link_to 'Add to Dashboard', post, class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
 <%= link_to 'New Post', new_post_path, class: "btn btn-primary" %>
