@@ -16,7 +16,7 @@
     <% if not @post.image.attachment.nil? %>
       <%= image_tag @post.image, style: 'max-width: 500px' %>
     <% end %>
-
+    <h2> <%= @post.category %> </h2>
     <br>
 
     <% if @post.user == current_user %>

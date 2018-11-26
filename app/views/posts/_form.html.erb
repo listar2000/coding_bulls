@@ -21,6 +21,11 @@
     <%= form.text_area :content, class: "form-control", id: "content-form" %>
   </div>
 
+  <div class="input-group new-post-field">
+    <span class="input-group-addon" id="basic-addon1">Category</span>
+    <%= form.text_field :category, class: "form-control" %>
+  </div>
+
   <div class="new-post-field">
     <span class="input-group-addon" id="basic-addon1">Choose File</span>
     <%= form.file_field :image, accept: "image/png,image/gif,image/jpeg", class: "form-control" %>

@@ -9,3 +9,7 @@
 <%= render 'form', post: @post %>
 
 <%= link_to 'Back', posts_path %>
+
+<h4> Cannot find the category you need? Click the button below to add a category </h4>
+
+<%= link_to 'New Category', new_post_path, class: "btn btn-primary" %>
