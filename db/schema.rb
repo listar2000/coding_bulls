@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 2018_11_27_011156) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
+  create_table "dashboard_and_posts", force: :cascade do |t|
+    t.bigint "workspace_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_dashboard_and_posts_on_post_id"
+    t.index ["workspace_id"], name: "index_dashboard_and_posts_on_workspace_id"
+  end
+
   create_table "follows", force: :cascade do |t|
     t.bigint "follower_id"
     t.bigint "followed_id"
@@ -61,6 +70,15 @@ ActiveRecord::Schema.define(version: 2018_11_27_011156) do
     t.integer "user_id"
     t.bigint "category_id"
     t.index ["category_id"], name: "index_posts_on_category_id"
+  end
+
+  create_table "user_and_posts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_user_and_posts_on_post_id"
+    t.index ["user_id"], name: "index_user_and_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -85,7 +103,11 @@ ActiveRecord::Schema.define(version: 2018_11_27_011156) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "dashboard_and_posts", "posts"
+  add_foreign_key "dashboard_and_posts", "workspaces"
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "posts", "categories"
+  add_foreign_key "user_and_posts", "posts"
+  add_foreign_key "user_and_posts", "users"
 end
