@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 2018_11_27_074021) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
-
   create_table "dashboard_and_posts", force: :cascade do |t|
     t.bigint "workspace_id"
     t.bigint "post_id"
@@ -62,7 +61,6 @@ ActiveRecord::Schema.define(version: 2018_11_27_074021) do
     t.index ["post_id"], name: "index_dashboard_and_posts_on_post_id"
     t.index ["workspace_id"], name: "index_dashboard_and_posts_on_workspace_id"
   end
-
 
   create_table "follows", force: :cascade do |t|
     t.bigint "follower_id"
