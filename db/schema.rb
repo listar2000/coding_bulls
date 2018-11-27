@@ -44,15 +44,6 @@ ActiveRecord::Schema.define(version: 2018_11_26_065409) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
-  create_table "dashboards", force: :cascade do |t|
-    t.string "clubname"
-    t.string "caption"
-    t.string "string"
-    t.string "link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "follows", force: :cascade do |t|
     t.bigint "follower_id"
     t.bigint "followed_id"
@@ -80,6 +71,7 @@ ActiveRecord::Schema.define(version: 2018_11_26_065409) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.integer "type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
