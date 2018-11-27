@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   # the followed are routes for the user_controller
   get "all_users", to: "users#all_users", as: "all_users"
   patch "/users/:id/like", to: "users#follow", as: "follow"
-  get "/users/:id/all_followers", to: "users#all_followers", as: "all_followers"
   get "/users/:id/dashboard", to: "users#dashboard", as: "user_dashboard"
 
   # the routes for category_controller

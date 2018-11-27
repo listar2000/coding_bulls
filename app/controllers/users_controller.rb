@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
     def all_users
         @users = User.all
+        @users = @users.find(params[:followed]).follow_me.map {|x| x.follower } if params[:followed].present?
+        @users = @users.find(params[:follower]).me_follow.map {|x| x.followed } if params[:follower].present?
+        @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
     end
 
     def follow
@@ -14,9 +17,5 @@ class UsersController < ApplicationController
             Follow.create(follower: current_user, followed: @followed)
             redirect_to request.referer
         end
-    end
-
-    def all_followers
-        @followships = User.find(params[:id]).follow_me
     end
 end
