@@ -22,6 +22,12 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def adds
+    @post = Post.find(params[:id]) # or, @post = Post.find_by(id: params[:id])
+    @adds = Adds.create(user: current_user, post: @post)
+    redirect_to posts_path
+  end
+
   # GET /posts/1/edit
   def edit
     if @post.user != current_user
