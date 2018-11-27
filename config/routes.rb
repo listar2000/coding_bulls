@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   patch "/users/:id/like", to: "users#follow", as: "follow"
   #get "/users/:id/dashboard", to: "users#dashboard", as: "user_dashboard"
   patch "/posts/:id/adds", to: "posts#adds", as: "adds"
+  post "/posts/add_category", to: "posts#add_category", as: "add_category"
 
   delete "/users/:id/unlike", to: "users#unfollow", as: "unfollow"
   get "/users/:id/dashboard", to: "users#dashboard", as: "user_dashboard"

@@ -25,7 +25,8 @@ class PostsController < ApplicationController
   def adds
     @post = Post.find(params[:id]) 
     @adds = Add.create(user: current_user, post: @post)
-    redirect_to posts_path
+    flash[:success] = "You have successfully add post ##{params[:id]}"
+    redirect_to request.referer
   end
 
   # GET /posts/1/edit
@@ -78,6 +79,11 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def add_category
+    @post = params[:post]
+    @post.category = params[:category]
   end
 
   private
