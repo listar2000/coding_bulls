@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_065409) do
+ActiveRecord::Schema.define(version: 2018_11_27_000910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,25 @@ ActiveRecord::Schema.define(version: 2018_11_26_065409) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.index ["user_id"], name: "indaex_categories_on_user_id"
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "dashboard_and_posts", force: :cascade do |t|
+    t.bigint "workspace_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_dashboard_and_posts_on_post_id"
+    t.index ["workspace_id"], name: "index_dashboard_and_posts_on_workspace_id"
+  end
+
+  create_table "dashboards", force: :cascade do |t|
+    t.string "clubname"
+    t.string "caption"
+    t.string "string"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "follows", force: :cascade do |t|
@@ -62,6 +80,15 @@ ActiveRecord::Schema.define(version: 2018_11_26_065409) do
     t.text "category"
   end
 
+  create_table "user_and_posts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_user_and_posts_on_post_id"
+    t.index ["user_id"], name: "index_user_and_posts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -71,7 +98,6 @@ ActiveRecord::Schema.define(version: 2018_11_26_065409) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.integer "type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -84,6 +110,10 @@ ActiveRecord::Schema.define(version: 2018_11_26_065409) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "dashboard_and_posts", "posts"
+  add_foreign_key "dashboard_and_posts", "workspaces"
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
+  add_foreign_key "user_and_posts", "posts"
+  add_foreign_key "user_and_posts", "users"
 end
