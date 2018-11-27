@@ -24,7 +24,7 @@ class PostsController < ApplicationController
 
   def adds
     @post = Post.find(params[:id]) 
-    @adds = Adds.create(user: current_user, post: @post)
+    @adds = Add.create(user: current_user, post: @post)
     redirect_to posts_path
   end
 

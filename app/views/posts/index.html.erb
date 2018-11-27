@@ -65,7 +65,7 @@
             <%= link_to 'Follow User', follow_path(post.user_id), class: "btn btn-warning", method: :patch %>
           <% end %>
         <% end %>
-        <%= link_to 'Add to Dashboard', root_path, class: "btn btn-success" %>
+        <%= link_to 'Add to Dashboard', adds_path(post), class: "btn btn-success", method: :patch %>
       </div>
     </div>
   <% end %>

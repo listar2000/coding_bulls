@@ -8,14 +8,12 @@ Rails.application.routes.draw do
   # the followed are routes for the user_controller
   get "all_users", to: "users#all_users", as: "all_users"
   patch "/users/:id/like", to: "users#follow", as: "follow"
-<<<<<<< HEAD
   #get "/users/:id/dashboard", to: "users#dashboard", as: "user_dashboard"
   patch "/posts/:id/adds", to: "posts#adds", as: "adds"
-=======
+
   delete "/users/:id/unlike", to: "users#unfollow", as: "unfollow"
   get "/users/:id/dashboard", to: "users#dashboard", as: "user_dashboard"
   patch "/posts/:id/adds", to: "posts#adds", as: "adds_path"
->>>>>>> 0ac26ea5d8bdabf7572b8e2185f24306408da734
 
   # the routes for category_controller
   get "/categories", to: "categories#index", as: "categories"
