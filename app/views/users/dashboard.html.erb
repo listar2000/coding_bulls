@@ -1,7 +1,15 @@
 <html>
 <h2> Dashboard </h2>
 <% if Add.all %>
-<h2> Thanks </h2>
+<% user = User.find(params[:id]) %>
+<% user.posts_added.each do |post| %>
+ <div class="panel-heading">
+    <h3 class="panel-title">
+        <%= post.caption %>
+    </h3>
+    <%= link_to 'Show', post, class: "btn btn-info" %>
+ </div>
+ <% end %>
 <% else %>
 <h2> Idiot </h2>
 <% end %>

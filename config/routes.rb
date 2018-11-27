@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
   delete "/users/:id/unlike", to: "users#unfollow", as: "unfollow"
   get "/users/:id/dashboard", to: "users#dashboard", as: "user_dashboard"
-  patch "/posts/:id/adds", to: "posts#adds", as: "adds_path"
 
   # the routes for category_controller
   get "/categories", to: "categories#index", as: "categories"
