@@ -9,6 +9,7 @@ class PostsController < ApplicationController
     @posts = @posts.where(user_id: params[:user_id]) if params[:user_id].present?
     @posts = @posts.where("content like '%#{params[:query]}%'") if params[:query].present?
     @posts = @posts.where(category: params[:category]) if params[:category].present?
+    @posts = @posts.page(params[:page]).per(10)
   end
 
   # GET /posts/1
@@ -19,6 +20,12 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+  end
+
+  def adds
+    @post = Post.find(params[:id]) 
+    @adds = Add.create(user: current_user, post: @post)
+    redirect_to posts_path
   end
 
   # GET /posts/1/edit
@@ -81,6 +88,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:caption, :content, :category, :image, :user_id)
+      params.require(:post).permit(:caption, :content, :category_id, :image, :user_id)
     end
 end

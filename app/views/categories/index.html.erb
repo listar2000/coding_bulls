@@ -13,7 +13,16 @@
 <% end %>
 
 <% @categories.each do |category| %>
-    <span class="label <%= cycle('label-success', 'label-info', 'label-warning', 'label-danger') -%>">
+    <%= link_to posts_path(category: category.id) do %>
+      <span class="label <%= cycle('label-success', 'label-info', 'label-warning', 'label-danger') -%> category-label">
         <%= category.name %>
-    </span>
+      </span>
+    <% end %>
 <% end %>
+
+<style>
+.category-label {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+</style>

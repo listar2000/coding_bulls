@@ -1,24 +1,28 @@
 class UsersController < ApplicationController
     def all_users
         @users = User.all
+        @users = @users.find(params[:followed]).follow_me.map {|x| x.follower } if params[:followed].present?
+        @users = @users.find(params[:follower]).me_follow.map {|x| x.followed } if params[:follower].present?
+        @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
     end
 
     def follow
         @followed = User.find(params[:id])
         if @followed == current_user
             flash[:error] = "You cannot follow yourself!"
-            redirect_to posts_path
+            # request.referer is the previous page -> where the request is called on
+            redirect_to request.referer
         else
             flash[:success] = "You have successfully followed #{@followed.name}" 
             Follow.create(follower: current_user, followed: @followed)
-            redirect_to posts_path
+            redirect_to request.referer
         end
     end
 
-    def dashboard
-    end
-
-    def all_followers
-        @followships = User.find(params[:id]).follow_me
+    def unfollow
+        @follow = Follow.find_by(followed_id: params[:id], follower_id: current_user.id)
+        @follow.destroy
+        flash[:danger] = "You have unfollowed #{User.find(params[:id]).name}"
+        redirect_to request.referer
     end
 end

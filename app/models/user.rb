@@ -7,4 +7,6 @@
   has_many :categories
   has_many :follow_me, :class_name => 'Follow', :foreign_key => 'followed_id'
   has_many :me_follow, :class_name => 'Follow', :foreign_key => 'follower_id'
+  has_many :adds
+  has_many :users_added, through: :adds, source: :post
 end
