@@ -23,8 +23,8 @@ class PostsController < ApplicationController
   end
 
   def adds
-    @post = Post.find(params[:id]) # or, @post = Post.find_by(id: params[:id])
-    @adds = Adds.create(user: current_user, post: @post)
+    @post = Post.find(params[:id]) 
+    @adds = Add.create(user: current_user, post: @post)
     redirect_to posts_path
   end
 
