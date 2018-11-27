@@ -7,7 +7,7 @@
 </ol>
 
 <% flash.each do |key, value| %>
-  <div class="<%= flash_class(key) %>">
+  <div class="flash <%= flash_class(key) %>">
       <%= value %>
   </div>
 <% end %>
@@ -47,6 +47,7 @@
               </span>
             <% end %>
           <% end %>
+          <i class="pull-right"> <%= time_ago_in_words(post.updated_at, include_seconds: true) %> ago</i>
         </h3>
       </div>
       <div class="panel-body">
@@ -65,6 +66,9 @@
     </div>
   <% end %>
 <% end %>
+
+<%= paginate @posts %>
+
 <%= link_to 'New Post', new_post_path, class: "btn btn-primary" %>
 
 <style>
@@ -72,3 +76,11 @@
     margin-bottom: 13px
 }
 </style>
+
+<script>
+$(function() {
+  setTimeout(function(){
+    $('.flash').slideUp(500);
+  }, 1000);
+});
+</script>

@@ -9,6 +9,7 @@ class PostsController < ApplicationController
     @posts = @posts.where(user_id: params[:user_id]) if params[:user_id].present?
     @posts = @posts.where("content like '%#{params[:query]}%'") if params[:query].present?
     @posts = @posts.where(category: params[:category]) if params[:category].present?
+    @posts = @posts.page(params[:page]).per(10)
   end
 
   # GET /posts/1
