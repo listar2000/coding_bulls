@@ -62,15 +62,6 @@ ActiveRecord::Schema.define(version: 2018_11_27_074021) do
     t.index ["workspace_id"], name: "index_dashboard_and_posts_on_workspace_id"
   end
 
-  create_table "dashboards", force: :cascade do |t|
-    t.string "clubname"
-    t.string "caption"
-    t.string "string"
-    t.string "link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "follows", force: :cascade do |t|
     t.bigint "follower_id"
     t.bigint "followed_id"
@@ -108,6 +99,7 @@ ActiveRecord::Schema.define(version: 2018_11_27_074021) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.integer "type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
