@@ -16,11 +16,18 @@
 #     )
 # end
 
-50.times do |post|
-    Post.create!(
-        caption: Faker::HarryPotter.spell,
-        content: Faker::HarryPotter.quote,
-        user: User.find(rand(1..User.count)),
-        category: Category.find(rand(1..Category.count))
+# 50.times do |post|
+#     Post.create!(
+#         caption: Faker::HarryPotter.spell,
+#         content: Faker::HarryPotter.quote,
+#         user: User.find(rand(1..User.count)),
+#         category: Category.find(rand(1..Category.count))
+#     )
+# end
+
+30.times do |post|
+    Follow.create!(
+        follower: User.find(3),
+        followed: User.find(rand(10..User.count))
     )
 end
