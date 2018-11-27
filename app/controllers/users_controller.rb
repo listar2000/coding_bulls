@@ -18,4 +18,11 @@ class UsersController < ApplicationController
             redirect_to request.referer
         end
     end
+
+    def unfollow
+        @follow = Follow.find_by(followed_id: params[:id], follower_id: current_user.id)
+        @follow.destroy
+        flash[:danger] = "You have unfollowed #{User.find(params[:id]).name}"
+        redirect_to request.referer
+    end
 end

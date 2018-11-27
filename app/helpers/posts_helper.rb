@@ -11,4 +11,8 @@ module PostsHelper
             "alert alert-warning"
         end
     end
+
+    def is_followed(fan, star)
+        Follow.find_by(follower: fan, followed: star).present?
+    end
 end
