@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-    before_action :set_category, only: [:show, :update, :destroy]
+    before_action :set_category, only: [:update, :destroy]
     before_action :authenticate_user!, only: [:new, :edit]
 
     def index
@@ -8,6 +8,8 @@ class CategoriesController < ApplicationController
     end
 
     def show
+        @category = current_user.categories.last
+        render json: @category
     end
 
     def create
@@ -18,7 +20,7 @@ class CategoriesController < ApplicationController
             if @category.save
                 format.html { 
                     flash[:success] = 'Category was successfully created.'
-                    redirect_to root_path
+                    return 
                 }
                 format.json { render :show, status: :created, location: @category }
             else
@@ -56,6 +58,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:name)
+      params.permit(:name)
     end
 end

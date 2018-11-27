@@ -80,7 +80,7 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def add_category
     @post = params[:post]
     @post.category = params[:category]

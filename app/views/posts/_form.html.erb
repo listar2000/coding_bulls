@@ -31,6 +31,9 @@
   </div>
 
   <div class="category-list">
+    <%= link_to "#", method: :post, class: "btn btn-success none-btn category-btn", remote: true do %>
+        None
+    <% end %>
     <% current_user.categories.each do |c| %>
       <%= link_to "#", method: :post, class: "btn btn-success category-btn", id: c.id, remote: true do %>
         <%= c.name %>
@@ -53,6 +56,11 @@
   .category-btn {
     background-color: grey;
     border-color: grey;
+    color: white;
+  }
+  .none-btn {
+    background-color: #5cb85c;
+    border-color: #5cb85c;
     color: white;
   }
   textarea {

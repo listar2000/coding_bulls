@@ -12,4 +12,46 @@
 
 <h4> Cannot find the category you need? Click the button below to add a category </h4>
 
-<%= link_to 'New Category', new_post_path, class: "btn btn-primary" %>
+<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">New Category</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New Category</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_with(url: '/categories', method: :post, remote: true) do |form| %>
+          <div class="input-group">
+            <%= form.text_field :name, class: "form-control", placeholder: "Search for..." %>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default submit-btn" data-dismiss="modal">Close</button>
+              <%= form.button :submit, class: 'btn btn-primary' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$('.submit-btn').on('click', function () {
+    $.ajax({
+        type: 'GET',
+        url: "@Url.Action("Find", "Hotel")",
+        datatype: "html",
+        beforeSend: function () {
+            $("#group-panel-ajax").append(res.loader);
+            setTimeout(delay);
+        },
+
+        success: function (data) {
+            $("#group-panel-ajax").find(res.loader).remove();
+            $('#group-panel-ajax').html($(data).find("#group-panel-ajax"));
+        }
+    });
+    return false;
+});
+</script>
