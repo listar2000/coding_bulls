@@ -36,15 +36,22 @@
   </div>
 <% else %>
   <% @posts.each do |post| %>
-    <div class="panel <%= cycle('panel-success', 'panel-info', 'panel-warning', 'panel-danger') -%>">
+    <div class="panel <%= cycle('panel-info', 'panel-success', 'panel-warning', 'panel-danger') -%> ">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= post.caption %></h3>
+        <h3 class="panel-title">
+          <%= post.caption %>
+          <% if post.category.present? %>
+            <%= link_to posts_path(category: post.category.id) do %>
+              <span class="label label-danger category-label">
+                <%= post.category.name %>
+              </span>
+            <% end %>
+          <% end %>
+        </h3>
       </div>
       <div class="panel-body">
         <p><%= post.content.lines.first %></p>
-        <h5><%= post.category %></h5>
         <br>
-
         <%= link_to 'Show', post, class: "btn btn-info" %>
         <% if user_signed_in? %>
           <% if post.user == current_user %>

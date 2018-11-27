@@ -7,11 +7,12 @@ class UsersController < ApplicationController
         @followed = User.find(params[:id])
         if @followed == current_user
             flash[:error] = "You cannot follow yourself!"
-            redirect_to posts_path
+            # request.referer is the previous page -> where the request is called on
+            redirect_to request.referer
         else
             flash[:success] = "You have successfully followed #{@followed.name}" 
             Follow.create(follower: current_user, followed: @followed)
-            redirect_to posts_path
+            redirect_to request.referer
         end
     end
 
