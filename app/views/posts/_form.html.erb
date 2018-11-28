@@ -140,11 +140,16 @@
         url: "/categories/1",
         datatype: "json",
         success: function (data) {
-          var $new_btn = $("<a>", {id: data.id, "class": "btn btn-success category-btn", html: data.name});
-          $new_btn.css("margin-left", "4px")
-          $('.category-list').append($new_btn)
+          if (data.id != $('.category-btn').last().attr('id')) {
+            var $new_btn = $("<a>", {id: data.id, "class": "btn btn-success category-btn", html: data.name});
+            $new_btn.css("margin-left", "4px")
+            $('.category-list').append($new_btn)
+            initialize()
+          }
+          else {
+            assert('repetitive name!')
+          }
           console.log(data.name)
-          initialize()
         }
     });
   })
