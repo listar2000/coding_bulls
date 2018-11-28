@@ -18,7 +18,7 @@
         <td>
             <img src="https://bootdey.com/img/Content/avatar/avatar<%= cycle(1..7)-%>.png" alt="">
             <a href="#" class="user-link"><%= user.name %></a>
-            <span class="user-subhead">Role</span>
+            <span class="user-subhead"><%= user.type %></span>
         </td>
         <td>
             <%= user.created_at %>
