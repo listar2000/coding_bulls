@@ -53,17 +53,6 @@ ActiveRecord::Schema.define(version: 2018_11_27_074021) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
-
-  create_table "dashboard_and_posts", force: :cascade do |t|
-    t.bigint "workspace_id"
-    t.bigint "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_dashboard_and_posts_on_post_id"
-    t.index ["workspace_id"], name: "index_dashboard_and_posts_on_workspace_id"
-  end
-
-
   create_table "follows", force: :cascade do |t|
     t.bigint "follower_id"
     t.bigint "followed_id"
@@ -106,18 +95,9 @@ ActiveRecord::Schema.define(version: 2018_11_27_074021) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "workspaces", force: :cascade do |t|
-    t.text "caption"
-    t.text "link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   add_foreign_key "adds", "posts"
   add_foreign_key "adds", "users"
   add_foreign_key "categories", "users"
-  add_foreign_key "dashboard_and_posts", "posts"
-  add_foreign_key "dashboard_and_posts", "workspaces"
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "posts", "categories"
