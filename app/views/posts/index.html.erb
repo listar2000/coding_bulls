@@ -65,16 +65,10 @@
             <%= link_to 'Follow User', follow_path(post.user_id), class: "btn btn-warning", method: :patch, remote: true %>
           <% end %>
         <% end %>
-        <% if Add.all.present? %>
-        <% Add.all.each do |add| %>
-          <% if post.id == add.post_id %>
-            <%= link_to 'Remove from Dashboard', unadds_path(post.id), method: :delete, class: "btn btn-info" %>
-          <% else %>
-            <%= link_to 'Add to Dashboard', adds_path(post), method: :patch, class: "btn btn-info" %>
-          <% end %>
-        <% end %>
-        <% else %> 
-          <%= link_to 'Add to Dashboard', adds_path(post), method: :patch, class: "btn btn-info" %>
+        <% if is_added(post, current_user) %>
+          <%= link_to 'Remove from Dashboard', unadds_path(post.id), method: :delete, class: "btn btn-dark", remote: true %>
+        <% else %>
+          <%= link_to 'Add to Dashboard', adds_path(post), method: :patch, class: "btn btn-info", remote: true %>
         <% end %>
       </div>
     </div>

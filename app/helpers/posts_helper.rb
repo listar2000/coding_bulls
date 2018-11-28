@@ -15,4 +15,8 @@ module PostsHelper
     def is_followed(fan, star)
         Follow.find_by(follower: fan, followed: star).present?
     end
+
+    def is_added(post, user)
+        Add.find_by(post: post, user: user).present?
+    end
 end
