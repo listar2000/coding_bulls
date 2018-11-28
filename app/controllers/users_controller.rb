@@ -15,6 +15,7 @@ class UsersController < ApplicationController
         else
             flash[:success] = "You have successfully followed #{@followed.name}" 
             Follow.create(follower: current_user, followed: @followed)
+            
             redirect_to request.referer
         end
     end
