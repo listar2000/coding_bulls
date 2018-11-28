@@ -46,6 +46,37 @@
   </div>
 <% end %>
 
+<hr>
+<h4> Cannot find the category you need? Click the button below to add a category </h4>
+
+<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">New Category</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New Category</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_with(url: '/categories', method: :post, remote: true) do |form| %>
+          <div class="input-group row">
+            <div class="col-xs-8">
+            <%= form.text_field :name, class: "form-control", placeholder: "Search for..." %>
+            </div>
+            <div class="col-xs-2">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            <div class="col-xs-2">
+            <%= form.button :submit, class: 'btn btn-primary submit-btn' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <style>
   .new-post-field {
     margin-bottom: 12px;
@@ -86,12 +117,40 @@
       }, false);
   }
   expandTextarea();
-  $('.category-btn').click(function() {
-    $(this).css("background-color", '#5cb85c');
-    $(this).css("border-color", '#5cb85c');
-    $(this).css("color", 'white');
-    $(this).siblings().css("background-color", 'grey');
-    $(this).siblings().css("border-color", 'grey');
-    $('input[name="post[category_id]"]').val($(this).attr('id'));
+
+  function initialize() {
+    $('.category-btn').click(function() {
+      $(this).css("background-color", '#5cb85c');
+      $(this).css("border-color", '#5cb85c');
+      $(this).css("color", 'white');
+      $(this).siblings().css("background-color", 'grey');
+      $(this).siblings().css("border-color", 'grey');
+      $('input[name="post[category_id]"]').val($(this).attr('id'));
+    });
+  }
+  initialize()
+
+  $(".submit-btn").on('click', function(e) {
+    $('#exampleModal').delay(2000).modal('hide')
   });
+
+  $('#exampleModal').on('hidden.bs.modal', function (e) {
+    $.ajax({
+        type: 'GET',
+        url: "/categories/1",
+        datatype: "json",
+        success: function (data) {
+          if (data.id != $('.category-btn').last().attr('id')) {
+            var $new_btn = $("<a>", {id: data.id, "class": "btn btn-success category-btn", html: data.name});
+            $new_btn.css("margin-left", "4px")
+            $('.category-list').append($new_btn)
+            initialize()
+          }
+          else {
+            assert('repetitive name!')
+          }
+          console.log(data.name)
+        }
+    });
+  })
 </script>

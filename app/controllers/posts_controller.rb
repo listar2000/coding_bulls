@@ -28,7 +28,6 @@ class PostsController < ApplicationController
     flash[:success] = "You have successfully add post ##{params[:id]}"
     redirect_to request.referer
   end
-
   # GET /posts/1/edit
   def edit
     if @post.user != current_user

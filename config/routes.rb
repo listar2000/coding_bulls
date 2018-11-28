@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   #get "/users/:id/dashboard", to: "users#dashboard", as: "user_dashboard"
   patch "/posts/:id/adds", to: "posts#adds", as: "adds"
   post "/posts/add_category", to: "posts#add_category", as: "add_category"
-
+  delete "/users/:id/unadds", to: "users#unadds", as: "unadds"
   delete "/users/:id/unlike", to: "users#unfollow", as: "unfollow"
   get "/users/:id/dashboard", to: "users#dashboard", as: "user_dashboard"
 
