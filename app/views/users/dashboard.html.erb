@@ -7,8 +7,9 @@
         <%= post.caption %>
     </h3>
     <%= link_to 'Show', post, class: "btn btn-info" %>
+    <%= link_to 'Remove from Dashboard', unadds_path(post.id), method: :delete, class: "btn btn-info" %>
  </div>
  <% end %>
 <% else %>
-<h2> Idiot </h2>
+<h2> You currently do not have any posts added to your dashboard </h2>
 <% end %>

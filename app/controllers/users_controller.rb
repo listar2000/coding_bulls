@@ -25,4 +25,10 @@ class UsersController < ApplicationController
         flash[:danger] = "You have unfollowed #{User.find(params[:id]).name}"
         redirect_to request.referer
     end
+    def unadds
+        @adds = Add.find_by(post_id: params[:id])
+        @adds.destroy
+        flash[:danger] = "You have removed #{Post.find(params[:id]).caption} from your Dashboard"
+        redirect_to request.referer
+    end
 end
