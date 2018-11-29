@@ -28,22 +28,13 @@
                <h5> <%= current_user.name %> </h5>
             </button>
             <ul class="dropdown-menu">
-<<<<<<< HEAD
               <h4><li><%= link_to '  My Followers', all_users_path(followed: current_user.id) %></li></h4>
               <h4><li><%= link_to '  My Posts', posts_path(user_id: current_user.id) %></li></h4>
               <h4><li><%= link_to '  My Categories', categories_path(user_id: current_user.id) %></li></h4>
               <h4><li><%= link_to '  My Dashboard', user_dashboard_path(id: current_user.id) %></li></h4>
               <h4><li role="separator" class="divider"></li></h4>
               <h4><li><%= link_to '  Log out', destroy_user_session_path, method: :delete %></li></h4>
-=======
-              <li><%= link_to 'My Profile', user_profile_path(id: current_user.id) %></li>
-              <li><%= link_to 'My Followers', all_users_path(followed: current_user.id) %></li>
-              <li><%= link_to 'My Posts', posts_path(user_id: current_user.id) %></li>
-              <li><%= link_to 'My Categories', categories_path(user_id: current_user.id) %></li>
-              <li><%= link_to 'My Dashboard', user_dashboard_path(id: current_user.id) %></li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
->>>>>>> 0a8882a081dbb7277adf56ad07fad790bab8046b
+              <h4><li><%= link_to 'My Profile', user_profile_path(id: current_user.id) %></li></h4>
             </ul>
           </div>
   <% else %>

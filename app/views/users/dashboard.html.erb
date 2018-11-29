@@ -5,16 +5,16 @@
  <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
       <div class="mainflip">
         <div class="frontside">
-          <div class="card" style="width:20rem;">
-            <h3 class="card-title">
+          <div class="card" style="width:32rem;">
+            <h3 class="title">
               <%= post.caption %></h3>
-             <img class="card-img-top img- fluid" src="https://img.webnots.com/2017/04/Bootstrap-Card-Image.png" alt="card image">
+             <img class="card-img-top img- fluid " src="https://img.webnots.com/2017/04/Bootstrap-Card-Image.png" alt="card image">
         </div>
       </div>
       <div class="backside">
-      <div class="card" style="width:20rem;">
-     	<%= link_to 'Show', post, class: "btn btn-info" %>
-    	<%= link_to 'Remove from Dashboard', unadds_path(post.id), method: :delete, class: "btn btn-info" %>
+      <div class="card" style="width:32rem;">
+     	<%= link_to 'Show', post, class: "btn btn-info h6" %>
+    	<%= link_to 'Remove from Dashboard', unadds_path(post.id), method: :delete, class: "btn btn-info h6" %>
  		</div>
  	</div>
  </div>
@@ -23,7 +23,9 @@
 <% else %>
 <h2> You currently do not have any posts added to your dashboard </h2>
 <% end %>
+
 <style>
+
 .margin {
   margin-top: 10px;
   margin-bottom:10px;
@@ -54,9 +56,9 @@ transform: rotateY(180deg);
 }
  
 .image-flip {
-margin-bottom:50px;
+margin-bottom:200px;
 width: 300px;
-height: 250px;
+height: 0px;
 }
  
 .mainflip {
@@ -108,13 +110,65 @@ transform: rotateY(-180deg);
 }
  
 .card, .card-img-top {
+margin-bottom: 6rem;
 border-width: 100%;
 border-color: #000000;
-background-color: #FFFFFF;
+background-image: url("https://wallpapertag.com/wallpaper/full/8/0/9/127761-download-free-light-yellow-background-1920x1080-for-iphone-6.jpg");
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 .card-title {
   background-color: #000000;
+}
+.h6{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+  font-weight: 300;
+  font-size: 1.7rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+}
+h5{
+margin-top: 0rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
+}
+.h5{
+margin-top: 0rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
+}
+h4{
+  margin-left: 0.5rem;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
+}
+.img{
+  width:400px;
+  height:250px;
+  margin-left:10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.title{
+  background-color: #000000;
+  height: 35px;
+  margin-left: 0rem;
+  font-size: 2rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+  color:#FFFFFF;
+  background-color: #000000;
+  padding: 5px;
 }
 </style>
 

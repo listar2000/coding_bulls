@@ -1,20 +1,20 @@
 <ol class="breadcrumb">
-  <li><a>Platform</a></li>
-  <li class="active">Categories</li>
+  <li><a class="h5">Platform</a></li>
+  <li class="active h5">Categories</li>
   <% request.query_parameters.each do |key, value| %>
     <li class="active"><%= key %> => <%= value %></li>
   <% end %>
 </ol>
 
 <% flash.each do |key, value| %>
-  <div class="<%= flash_class(key) %>">
+  <div class="<%= flash_class(key) %> h5">
       <%= value %>
   </div>
 <% end %>
 
 <% @categories.each do |category| %>
     <%= link_to posts_path(category: category.id) do %>
-      <span class="label <%= cycle('label-success', 'label-info', 'label-warning', 'label-danger') -%> category-label">
+      <span class="label h5 <%= cycle('label-success', 'label-info', 'label-warning', 'label-danger') -%> category-label">
         <%= category.name %>
       </span>
     <% end %>
@@ -24,6 +24,14 @@
 .category-label {
   margin-left: 2px;
   margin-right: 2px;
+}
+.h5{
+margin-top: 0rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
 }
 </style>
 

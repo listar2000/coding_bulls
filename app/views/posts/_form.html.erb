@@ -12,63 +12,63 @@
   <% end %>
 
   <div class="input-group new-post-field">
-    <span class="input-group-addon" id="basic-addon1">Caption</span>
-    <%= form.text_field :caption, class: "form-control" %>
+    <span class="input-group-addon h5" id="basic-addon1">Caption</span>
+    <%= form.text_field :caption, class: "form-control h5" %>
   </div>
 
   <div class="input-group new-post-field">
-    <span class="input-group-addon" id="basic-addon1">Content</span>
-    <%= form.text_area :content, class: "form-control", id: "content-form" %>
+    <span class="input-group-addon h5" id="basic-addon1">Content</span>
+    <%= form.text_area :content, class: "form-control h5", id: "content-form" %>
   </div>
 
   <div>
-    <%= form.text_field :category_id, class: "form-control hidden", id: "content-form" %>
+    <%= form.text_field :category_id, class: "form-control hidden h5", id: "content-form" %>
   </div>
 
   <div class="new-post-field img-div">
-    <span class="input-group-addon" id="basic-addon1">Choose File</span>
-    <%= form.file_field :image, accept: "image/png,image/gif,image/jpeg", class: "form-control file-upload" %>
+    <span class="input-group-addon h5" id="basic-addon1">Choose File</span>
+    <%= form.file_field :image, accept: "image/png,image/gif,image/jpeg", class: "form-control file-upload h5" %>
   </div>
 
   <div class="category-list">
-    <%= link_to "#", method: :post, class: "btn btn-success none-btn category-btn", remote: true do %>
+    <%= link_to "#", method: :post, class: "btn btn-success none-btn category-btn h6", remote: true do %>
         None
     <% end %>
     <% current_user.categories.each do |c| %>
-      <%= link_to "#", method: :post, class: "btn btn-success category-btn", id: c.id, remote: true do %>
+      <%= link_to "#", method: :post, class: "btn btn-success category-btn h6", id: c.id, remote: true do %>
         <%= c.name %>
       <% end %>
     <% end %> 
   </div>
 
   <div class="actions">
-    <%= form.button :submit, class: 'btn btn-primary' %>
+    <%= form.button :submit, class: 'btn btn-primary h6' %>
   </div>
 <% end %>
 
 <hr>
 <h4> Cannot find the category you need? Click the button below to add a category </h4>
 
-<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">New Category</button>
+<button class="btn btn-primary h6" data-toggle="modal" data-target="#exampleModal">New Category</button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="exampleModalLabel">New Category</h4>
+        <h4 class="modal-title h5" id="exampleModalLabel">New Category</h4>
       </div>
       <div class="modal-body">
         <%= form_with(url: '/categories', method: :post, remote: true) do |form| %>
           <div class="input-group row">
             <div class="col-xs-8">
-            <%= form.text_field :name, class: "form-control", placeholder: "Search for..." %>
+            <%= form.text_field :name, class: "form-control h5", placeholder: "Search for..." %>
             </div>
             <div class="col-xs-2">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default h6" data-dismiss="modal">Close</button>
             </div>
             <div class="col-xs-2">
-            <%= form.button :submit, class: 'btn btn-primary submit-btn' %>
+            <%= form.button :submit, class: 'btn btn-primary submit-btn h6' %>
             </div>
           </div>
         <% end %>
@@ -97,6 +97,120 @@
   .img-preview {
     margin-top: 7px;
   }
+  form_main {
+    width: 100%;
+}
+.form_main h4 {
+    font-family: roboto;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+.heading {
+    border-bottom: 1px solid #fcab0e;
+    padding-bottom: 9px;
+    position: relative;
+}
+.heading span {
+    background: #9e6600 none repeat scroll 0 0;
+    bottom: -2px;
+    height: 3px;
+    left: 0;
+    position: absolute;
+    width: 75px;
+}   
+.form {
+    border-radius: 7px;
+    padding: 6px;
+}
+.txt[type="text"] {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 10px 0 10px 5px;
+    width: 100%;
+}
+.txt_3[type="text"] {
+    margin: 10px 0 0;
+    padding: 10px 0 10px 5px;
+    width: 100%;
+}
+.txt2[type="submit"] {
+    background: #242424 none repeat scroll 0 0;
+    border: 1px solid #4f5c04;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 35px;
+    margin: 10px 0;
+    padding: 0;
+    text-transform: uppercase;
+    width: 30%;
+}
+.txt2:hover {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    color: #5793ef;
+    transition: all 0.5s ease 0s;
+}
+  .h6{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.7rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+}
+  .h62{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 2.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+}
+h5{
+margin-top: 0rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
+}
+.h5{
+margin-top: 0rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
+}
+h4{
+  margin-left: 0.5rem;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
+}
+.img{
+  width:400px;
+  height:250px;
+  margin-left:10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.title{
+  background-color: #000000;
+  height: 35px;
+  margin-left: 0rem;
+  font-size: 2rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+  color:#FFFFFF;
+  background-color: #000000;
+  padding: 5px;
+}
   textarea {
     /* margin:0px 0px; this is redundant anyways since its specified below*/
     padding-top:10px;

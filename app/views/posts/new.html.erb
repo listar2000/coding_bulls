@@ -1,9 +1,29 @@
 <ol class="breadcrumb">
-  <li><a>Platform</a></li>
-  <li><%= link_to 'Posts', root_path %></li>
-  <li class="active">New Post</li>
+  <li><a class="h5">Platform</a></li>
+  <li><%= link_to 'Posts', root_path%></li>
+  <li class="active h5">New Post</li>
 </ol>
 
-<h1>New Post</h1>
+<h1 class="h62">New Post</h1>
 
 <%= render 'form', post: @post %>
+
+<style>
+ .h62{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 2.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+}
+
+.h5{
+margin-top: 0rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
+}
+</style>
