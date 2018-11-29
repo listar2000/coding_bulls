@@ -1,40 +1,43 @@
+<% if user_signed_in? %>
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <%= link_to root_path, class: "navbar-brand" do %>
-        Home <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+      <%= link_to root_path, class: "navbar-brand" do %><h6>
+        Home</h6>
       <% end %>
     </div>
     <div class="navbar-header">
       <%= link_to posts_path, class: "navbar-brand" do %>
-        All Posts <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-      <% end %>
+        <h6>Wall</h6>      
+    <% end %>
     </div>
     <div class="navbar-header">
       <%= link_to all_users_path, class: "navbar-brand" do %>
-        All Users <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        <h6>My Co-members</h6>
+      <% end %>
+    </div>
+      <div class="navbar-header">
+      <%= link_to categories_path, class: "navbar-brand" do %>
+        <h6>Categories of Posts</h6>
       <% end %>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
           <div class="btn-group navbar-btn">
             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user"></span>
-                <%= current_user.name %>
-              <span class="caret"></span>
+               <h5> <%= current_user.name %> </h5>
             </button>
             <ul class="dropdown-menu">
-              <li><%= link_to 'My Followers', all_users_path(followed: current_user.id) %></li>
-              <li><%= link_to 'My Posts', posts_path(user_id: current_user.id) %></li>
-              <li><%= link_to 'My Categories', categories_path(user_id: current_user.id) %></li>
-              <li><%= link_to 'My Dashboard', user_dashboard_path(id: current_user.id) %></li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+              <h4><li><%= link_to '  My Followers', all_users_path(followed: current_user.id) %></li></h4>
+              <h4><li><%= link_to '  My Posts', posts_path(user_id: current_user.id) %></li></h4>
+              <h4><li><%= link_to '  My Categories', categories_path(user_id: current_user.id) %></li></h4>
+              <h4><li><%= link_to '  My Dashboard', user_dashboard_path(id: current_user.id) %></li></h4>
+              <h4><li role="separator" class="divider"></li></h4>
+              <h4><li><%= link_to '  Log out', destroy_user_session_path, method: :delete %></li></h4>
             </ul>
           </div>
-        <% else %>
-          <%= link_to 'Sign in', new_user_session_path, class: "btn btn-success navbar-btn" %>
+  <% else %>
+          <div align="right"><h6><%= link_to 'Sign in', new_user_session_path, class: "btn btn-primary navbar-btn" %></h6></div>
         <% end %>
       </ul>
     </div>
@@ -44,7 +47,6 @@
 <style>
 .navbar-default {
   background-color: #21618C;
-  border-color: #E7E7E7;
 }
 .navbar-default .navbar-brand {
   color: white;
@@ -52,5 +54,35 @@
 .navbar-btn {
   margin-top: 7px;
   margin-right: 15px;
+}
+h6{
+  margin-top: 0rem;
+  font-weight: 300;
+  font-size: 2.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+}
+h5{
+margin-top: 0rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
+}
+.h5{
+margin-top: 0rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
+}
+h4{
+  margin-left: 0.5rem;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
 }
 </style>

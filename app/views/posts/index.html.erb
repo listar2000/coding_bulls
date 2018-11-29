@@ -1,13 +1,14 @@
 <ol class="breadcrumb">
-  <li><a>Platform</a></li>
+  <li><a class="h5">Platform</a></li>
   <li class="active">Posts</li>
   <% if request.query_parameters.present? %>
-    <li class="active">Search results</li>
+    <li class="active h5">Search results</li>
   <% end %>
 </ol>
+<div align="right"><%= link_to 'New Post', new_post_path, class: "btn btn-primary h5" %></div>
 
 <% flash.each do |key, value| %>
-  <div class="flash <%= flash_class(key) %>">
+  <div class="flash h5 <%= flash_class(key) %>">
       <%= value %>
   </div>
 <% end %>
@@ -15,7 +16,7 @@
 <div class="row search-banner">
   <div class="col-lg-5 ">
     <%= form_with url: "/posts", method: 'get', local: true do |form| %>
-      <div class="input-group">
+      <div class="input-group h5">
         <%= form.text_field :query, class: "form-control", placeholder: "Search for..." %>
         <span class="input-group-btn">
           <%= form.button :submit, class: "btn btn-default"%>
@@ -27,59 +28,80 @@
 
 <% if @posts.count == 0 %>
   <div class="panel panel-danger">
-    <div class="panel-heading">
-      <h3 class="panel-title">No Post Can be Found, Sorry...</h3>
+    <div class="panel-heading h5">
+      <h3 class="panel-title h5">No Post Can be Found, Sorry...</h3>
     </div>
-    <div class="panel-body">
+    <div class="panel-body h5">
       <p>Based on your query, there's no related post in our system.</p>
     </div>
   </div>
 <% else %>
   <% @posts.each do |post| %>
-    <div class="panel <%= cycle('panel-info', 'panel-success', 'panel-warning', 'panel-danger') -%> ">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <%= post.caption %>
-          <% if post.category.present? %>
-            <%= link_to posts_path(category: post.category.id) do %>
-              <span class="label label-danger category-label">
-                <%= post.category.name %>
-              </span>
-            <% end %>
-          <% end %>
-          <i class="pull-right"> <%= time_ago_in_words(post.updated_at, include_seconds: true) %> ago</i>
-        </h3>
+    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+      <div class="mainflip">
+        <div class="frontside">
+          <div class="card" style="width:114rem;">
+            <h3 class="title">
+              <%= post.caption %></h3>
+              <br>
+          <img class= "img fluid" src="http://www.gobeyondthebrochure.com/wp-content/uploads/2015/10/A-Wavering-Sense-of-Safety-at-University-of-California-Berkeley.jpg">
+            <div class="card-body">
+              <% if post.category.present? %>
+                <%= link_to posts_path(category: post.category.id) do %>
+                  <span class="label label-danger category-label">
+                    <h4><%= post.category.name %></h4>
+                  </span>
+                <% end %>
+              <% end %>
+              <i class="pull-right card-body h5"> Last updated at <%= time_ago_in_words(post.updated_at, include_seconds: true) %> ago</i>
+              <p class="margin h6"><%= post.content.lines.first %></p>
       </div>
-      <div class="panel-body">
-        <p><%= post.content.lines.first %></p>
-        <br>
-        <%= link_to 'Show', post, class: "btn btn-info" %>
+      </div>
+      </div>
+      <br>
+      <div class="backside">
+      <div class="card" style="width:114rem;">
+      <div>
+       <% post.content.lines.each do |line| %>
+      <p class="margin h6"><%= line %></p>
+      <% end %>
+      </div>
         <% if user_signed_in? %>
           <% if post.user == current_user %>
-            <%= link_to 'Edit', edit_post_path(post), class: "btn btn-success" %>
-            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure you want to delete?' }, class: "btn btn-danger"%>
+             <%= link_to 'Show', post, class: "btn btn-info margin h5" %>
+            <%= link_to 'Edit', edit_post_path(post), class: "btn btn-success margin h5" %>
+            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure you want to delete?' }, class: "btn btn-danger h5"%>
           <% end %>
           <% if is_followed(current_user, post.user) %>
-            <%= link_to 'Unfollow', unfollow_path(post.user_id), class: "btn btn-dark", method: :delete, remote: true %>
+            <%= link_to 'Unfollow', unfollow_path(post.user_id), class: "btn btn-dark margin h5", method: :delete, remote: true %>
           <% else %>
-            <%= link_to 'Follow User', follow_path(post.user_id), class: "btn btn-warning", method: :patch, remote: true %>
+            <%= link_to 'Follow User', follow_path(post.user_id), class: "btn btn-warning margin h5", method: :patch, remote: true %>
           <% end %>
         <% end %>
         <% if is_added(post, current_user) %>
-          <%= link_to 'Remove from Dashboard', unadds_path(post.id), method: :delete, class: "btn btn-dark", remote: true %>
+          <%= link_to 'Remove from Dashboard', unadds_path(post.id), method: :delete, class: "btn btn-dark h5", remote: true %>
         <% else %>
-          <%= link_to 'Add to Dashboard', adds_path(post), method: :patch, class: "btn btn-info", remote: true %>
+          <%= link_to 'Add to Dashboard', adds_path(post), method: :patch, class: "btn btn-info h5", remote: true %>
         <% end %>
-      </div>
-    </div>
+     </div>
+</div>
+</div>
+</div>
   <% end %>
 <% end %>
 
 <%= paginate @posts %>
 
-<%= link_to 'New Post', new_post_path, class: "btn btn-primary" %>
+
 
 <style>
+
+.margin {
+  margin-top: 10px;
+  margin-bottom:10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 .search-banner {
   margin-bottom: 13px
 }
@@ -87,6 +109,135 @@
   background-color: #394d5f;
   border-color: #394d5f;
   color: white;
+}
+.image-flip:hover .backside, .image-flip.hover .backside {
+-webkit-transform: rotateY(0deg);
+-moz-transform: rotateY(0deg);
+-o-transform: rotateY(0deg);
+-ms-transform: rotateY(0deg);
+transform: rotateY(0deg);
+}
+ 
+.image-flip:hover .frontside, .image-flip.hover .frontside {
+-webkit-transform: rotateY(180deg);
+-moz-transform: rotateY(180deg);
+-o-transform: rotateY(180deg);
+transform: rotateY(180deg);
+}
+ 
+.image-flip {
+margin-bottom:200px;
+width: 300px;
+height: 250px;
+}
+ 
+.mainflip {
+-webkit-transition: 1s;
+-webkit-transform-style: preserve-3d;
+-ms-transition: 1s;
+-moz-transition: 1s;
+-moz-transform: perspective(1000px);
+-moz-transform-style: preserve-3d;
+-ms-transform-style: preserve-3d;
+transition: 1s;
+transform-style: preserve-3d;
+position: relative;
+}
+ 
+.frontside, .backside {
+-webkit-backface-visibility: hidden;
+-moz-backface-visibility: hidden;
+-ms-backface-visibility: hidden;
+backface-visibility: hidden;
+-webkit-transition: 1s;
+-webkit-transform-style: preserve-3d;
+-moz-transition: 1s;
+-moz-transform-style: preserve-3d;
+-o-transition: 1s;
+-o-transform-style: preserve-3d;
+-ms-transition: 1s;
+-ms-transform-style: preserve-3d;
+transition: 1s;
+transform-style: preserve-3d;
+position: absolute;
+top: 0;
+left: 0;
+}
+ 
+.frontside {
+-webkit-transform: rotateY(0deg);
+-ms-transform: rotateY(0deg);
+z-index: 2;
+}
+ 
+.backside {
+background: white;
+-webkit-transform: rotateY(-180deg);
+-moz-transform: rotateY(-180deg);
+-o-transform: rotateY(-180deg);
+-ms-transform: rotateY(-180deg);
+transform: rotateY(-180deg);
+}
+ 
+.card, .card-img-top {
+margin-bottom: 200rem;
+border-width: 100%;
+border-color: #000000;
+background-image: url("https://wallpapertag.com/wallpaper/full/8/0/9/127761-download-free-light-yellow-background-1920x1080-for-iphone-6.jpg");
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.card-title {
+  background-color: #000000;
+}
+.h6{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.7rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+}
+h5{
+margin-top: 0rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
+}
+.h5{
+margin-top: 0rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
+}
+h4{
+  margin-left: 0.5rem;
+  font-size: 1.5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+
+}
+.img{
+  width:400px;
+  height:250px;
+  margin-left:10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.title{
+  background-color: #000000;
+  height: 35px;
+  margin-left: 0rem;
+  font-size: 2rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+  color:#FFFFFF;
+  background-color: #000000;
+  padding: 5px;
 }
 </style>
 

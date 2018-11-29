@@ -1,26 +1,157 @@
-<h2>Log in</h2>
+<style>
+:root {
+  --input-padding-x: 1.5rem;
+  --input-padding-y: .75rem;
+}
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+body {
+  background-image: url("https://www.ischool.berkeley.edu/sites/all/themes/custom/i_school/images/homepage_hero/1_campanile_at_night.jpg");
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+}
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+.card-signin {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: inset -0.2rem -2rem 2rem rgba(0, 0, 0, 0.2);
+  background-color: #FFFFFF
+}
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 3.0rem;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-weight: bold;
+}
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+.card-signin .card-body {
+  padding: 2rem;
+}
+
+.form-signin {
+  width: 100%;
+}
+
+.form-signin .btn {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  transition: all 0.2s;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group input {
+  border-radius: 2rem;
+}
+
+.form-label-group>input,
+.form-label-group>label {
+  padding: var(--input-padding-y) var(--input-padding-x);
+}
+
+.form-label-group>label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  /* Override default `<label>` margin */
+  line-height: 1.5;
+  color: #495057;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  transition: all .1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::placeholder {
+  color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+  padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+  padding-bottom: calc(var(--input-padding-y) / 3);
+}
+
+.form-label-group input:not(:placeholder-shown)~label {
+  padding-top: calc(var(--input-padding-y) / 3);
+  padding-bottom: calc(var(--input-padding-y) / 3);
+  font-size: 12px;
+  color: #777;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+}
+
+.btn-google {
+  color: white;
+  background-color: #ea4335;
+}
+
+.btn-facebook {
+  color: white;
+  background-color: #3b5998;
+}
+h6 {
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+}
+</style>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin">
+          <div class="card-body">
+            <h5 class="card-title text-center">Sign In</h5>
+            <div class="form-signin">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="form-label-group">
+              <h6> <%= f.email_field :email, class:"form-control" %> </h6>
+            </div>
+            <div class="form-label-group">
+              <h6><%= f.password_field :password, class:"form-control" %></h6>
+            </div>
+            <div class="custom-control custom-checkbox mb-3">
+            <% if devise_mapping.rememberable? -%>
+              <%= f.check_box :remember_me, class:"custom-control-input" %><h6><%= f.label :remember_me, class:"custom-control-label" %></h6>
+            <% end -%>
+            </div>
+    <div>
+    <%= f.submit "Log in", class:"btn btn-lg btn-primary btn-block text-uppercase" %>
   </div>
 <% end %>
-
+<br>
+<br>
 <%= render "devise/shared/links" %>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+
+

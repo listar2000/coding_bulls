@@ -2,14 +2,126 @@
 <% if Add.all %>
 <% user = User.find(params[:id]) %>
 <% user.posts_added.each do |post| %>
- <div class="panel-heading">
-    <h3 class="panel-title">
-        <%= post.caption %>
-    </h3>
-    <%= link_to 'Show', post, class: "btn btn-info" %>
-    <%= link_to 'Remove from Dashboard', unadds_path(post.id), method: :delete, class: "btn btn-info" %>
+ <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+      <div class="mainflip">
+        <div class="frontside">
+          <div class="card" style="width:20rem;">
+            <h3 class="card-title">
+              <%= post.caption %></h3>
+             <img class="card-img-top img- fluid" src="https://img.webnots.com/2017/04/Bootstrap-Card-Image.png" alt="card image">
+        </div>
+      </div>
+      <div class="backside">
+      <div class="card" style="width:20rem;">
+     	<%= link_to 'Show', post, class: "btn btn-info" %>
+    	<%= link_to 'Remove from Dashboard', unadds_path(post.id), method: :delete, class: "btn btn-info" %>
+ 		</div>
+ 	</div>
  </div>
+</div>
  <% end %>
 <% else %>
 <h2> You currently do not have any posts added to your dashboard </h2>
 <% end %>
+<style>
+.margin {
+  margin-top: 10px;
+  margin-bottom:10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.search-banner {
+  margin-bottom: 13px
+}
+.btn-dark {
+  background-color: #394d5f;
+  border-color: #394d5f;
+  color: white;
+}
+.image-flip:hover .backside, .image-flip.hover .backside {
+-webkit-transform: rotateY(0deg);
+-moz-transform: rotateY(0deg);
+-o-transform: rotateY(0deg);
+-ms-transform: rotateY(0deg);
+transform: rotateY(0deg);
+}
+ 
+.image-flip:hover .frontside, .image-flip.hover .frontside {
+-webkit-transform: rotateY(180deg);
+-moz-transform: rotateY(180deg);
+-o-transform: rotateY(180deg);
+transform: rotateY(180deg);
+}
+ 
+.image-flip {
+margin-bottom:50px;
+width: 300px;
+height: 250px;
+}
+ 
+.mainflip {
+-webkit-transition: 1s;
+-webkit-transform-style: preserve-3d;
+-ms-transition: 1s;
+-moz-transition: 1s;
+-moz-transform: perspective(1000px);
+-moz-transform-style: preserve-3d;
+-ms-transform-style: preserve-3d;
+transition: 1s;
+transform-style: preserve-3d;
+position: relative;
+}
+ 
+.frontside, .backside {
+-webkit-backface-visibility: hidden;
+-moz-backface-visibility: hidden;
+-ms-backface-visibility: hidden;
+backface-visibility: hidden;
+-webkit-transition: 1s;
+-webkit-transform-style: preserve-3d;
+-moz-transition: 1s;
+-moz-transform-style: preserve-3d;
+-o-transition: 1s;
+-o-transform-style: preserve-3d;
+-ms-transition: 1s;
+-ms-transform-style: preserve-3d;
+transition: 1s;
+transform-style: preserve-3d;
+position: absolute;
+top: 0;
+left: 0;
+}
+ 
+.frontside {
+-webkit-transform: rotateY(0deg);
+-ms-transform: rotateY(0deg);
+z-index: 2;
+}
+ 
+.backside {
+background: white;
+-webkit-transform: rotateY(-180deg);
+-moz-transform: rotateY(-180deg);
+-o-transform: rotateY(-180deg);
+-ms-transform: rotateY(-180deg);
+transform: rotateY(-180deg);
+}
+ 
+.card, .card-img-top {
+border-width: 100%;
+border-color: #000000;
+background-color: #FFFFFF;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card-title {
+  background-color: #000000;
+}
+</style>
+
+<script>
+$(function() {
+  setTimeout(function(){
+    $('.flash').slideUp(500);
+  }, 1000);
+});
+</script>
