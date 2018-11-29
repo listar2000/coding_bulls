@@ -25,6 +25,7 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
+              <li><%= link_to 'My Profile', user_profile_path(id: current_user.id) %></li>
               <li><%= link_to 'My Followers', all_users_path(followed: current_user.id) %></li>
               <li><%= link_to 'My Posts', posts_path(user_id: current_user.id) %></li>
               <li><%= link_to 'My Categories', categories_path(user_id: current_user.id) %></li>

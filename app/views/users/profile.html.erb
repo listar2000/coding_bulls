@@ -1,0 +1,406 @@
+<div class="row">
+    <div class="col-sm-3">
+        <!--left col-->
+        <div class="text-center">
+            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+            <h6>Upload a different photo...</h6>
+            <input type="file" class="text-center center-block file-upload">
+        </div>
+        <br>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
+            <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> <%= @user.posts.count %></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> <%= @fans.count%></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Categories</strong></span> <%= @user.categories.count %></li>
+        </ul>
+
+    </div>
+    <!--/col-3-->
+    <div class="col-sm-9">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+            <li><a data-toggle="tab" href="#posts" id="post-tab">Posts</a></li>
+            <li><a data-toggle="tab" href="#followers">Followers</a></li>
+        </ul>
+
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                <hr>
+                <form class="form" action="##" method="post" id="registrationForm">
+                    <div class="form-group">
+
+                        <div class="col-xs-6">
+                            <label for="first_name">
+                                <h4>First name</h4>
+                            </label>
+                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name"
+                                title="enter your first name if any.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-xs-6">
+                            <label for="last_name">
+                                <h4>Last name</h4>
+                            </label>
+                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name"
+                                title="enter your last name if any.">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-xs-6">
+                            <label for="phone">
+                                <h4>Phone</h4>
+                            </label>
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone"
+                                title="enter your phone number if any.">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="mobile">
+                                <h4>Mobile</h4>
+                            </label>
+                            <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number"
+                                title="enter your mobile number if any.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-xs-6">
+                            <label for="email">
+                                <h4>Email</h4>
+                            </label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com"
+                                title="enter your email.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-xs-6">
+                            <label for="email">
+                                <h4>Location</h4>
+                            </label>
+                            <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-xs-6">
+                            <label for="password">
+                                <h4>Password</h4>
+                            </label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="password"
+                                title="enter your password.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-xs-6">
+                            <label for="password2">
+                                <h4>Verify</h4>
+                            </label>
+                            <input type="password" class="form-control" name="password2" id="password2" placeholder="password2"
+                                title="enter your password2.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <br>
+                            <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i>
+                                Save</button>
+                            <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                        </div>
+                    </div>
+                </form>
+
+                <hr>
+
+            </div>
+            <!--/tab-pane-->
+            <div class="tab-pane" id="posts">
+                <hr>
+                    <% @posts.each do |post| %>
+                    <div class="panel <%= cycle('panel-info', 'panel-success', 'panel-warning', 'panel-danger') -%> ">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <%= post.caption %>
+                                <% if post.category.present? %>
+                                <%= link_to posts_path(category: post.category.id) do %>
+                                <span class="label label-danger category-label">
+                                    <%= post.category.name %>
+                                </span>
+                                <% end %>
+                                <% end %>
+                                <i class="pull-right">
+                                    <%= time_ago_in_words(post.updated_at, include_seconds: true) %> ago</i>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                <%= post.content.lines.first %>
+                            </p>
+                            <br>
+                            <%= link_to 'Show', post, class: "btn btn-info" %>
+                            <% if user_signed_in? %>
+                            <% if post.user == current_user %>
+                            <%= link_to 'Edit', edit_post_path(post), class: "btn btn-success" %>
+                            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure you want to delete?' }, class: "btn btn-danger btn-action"%>
+                            <% end %>
+                            <% if is_followed(current_user, post.user) %>
+                            <%= link_to 'Unfollow', unfollow_path(post.user_id), class: "btn btn-dark btn-action", method: :delete, remote: true %>
+                            <% else %>
+                            <%= link_to 'Follow User', follow_path(post.user_id), class: "btn btn-warning btn-action", method: :patch, remote: true %>
+                            <% end %>
+                            <% end %>
+                            <% if is_added(post, current_user) %>
+                            <%= link_to 'Remove from Dashboard', unadds_path(post.id), method: :delete, class: "btn btn-dark btn-action", remote: true %>
+                            <% else %>
+                            <%= link_to 'Add to Dashboard', adds_path(post), method: :patch, class: "btn btn-info btn-action", remote: true %>
+                            <% end %>
+                        </div>
+                    </div>
+                    <% end %>
+                <%= link_to 'See More', posts_path(user_id: @user.id), class: "btn btn-success"%>
+            </div>
+            <!--/tab-pane-->
+            <div class="tab-pane" id="followers">
+                <hr>
+                <table class="table user-list">
+                    <thead>
+                        <tr>
+                            <th><span>User</span></th>
+                            <th><span>Created</span></th>
+                            <th class="text-center"><span>Followers</span></th>
+                            <th><span>Email</span></th>
+                            <th><span>View Posts</span></th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% @fans.each do |fan| %>
+                    <tr>
+                        <td>
+                            <img src="https://bootdey.com/img/Content/avatar/avatar<%= cycle(1..7)-%>.png" alt="">
+                            <a href="#" class="user-link"><%= fan.name %></a>
+                            <span class="user-subhead"><%= fan.type %></span>
+                        </td>
+                        <td>
+                            <%= fan.created_at %>
+                        </td>
+                        <td class="text-center">
+                            <span class="label label-danger">
+                                <%= fan.follow_me.count %>
+                            </span>
+                        </td>
+                        <td>
+                            <a href="#" class="email-field"><%= fan.email %></a>
+                        </td>
+                        <td>
+                            <%= link_to "Posts", posts_path(user_id: fan.id), class: "btn btn-success" %>
+                        </td>
+                    </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--/tab-pane-->
+    </div>
+    <!--/tab-content-->
+
+</div>
+<!--/col-9-->
+</div>
+<!--/row-->
+
+<style>
+.btn-dark {
+  background-color: #394d5f;
+  border-color: #394d5f;
+  color: white;
+}
+/* USER LIST TABLE */
+.user-list tbody td > img {
+    position: relative;
+	max-width: 50px;
+	float: left;
+	margin-right: 15px;
+}
+.user-list tbody td .user-link {
+	display: block;
+	font-size: 1.25em;
+	padding-top: 3px;
+	margin-left: 60px;
+}
+.user-list tbody td .user-subhead {
+	font-size: 0.875em;
+	font-style: italic;
+}
+
+/* TABLES */
+.table {
+    border-collapse: separate;
+}
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+	background-color: #eee;
+}
+.table thead > tr > th {
+	border-bottom: 1px solid #C2C2C2;
+	padding-bottom: 0;
+}
+.table tbody > tr > td {
+	font-size: 0.875em;
+	background: #f5f5f5;
+	border-top: 10px solid #fff;
+	vertical-align: middle;
+	padding: 12px 8px;
+}
+.table tbody > tr > td:first-child,
+.table thead > tr > th:first-child {
+	padding-left: 20px;
+}
+.table thead > tr > th span {
+	border-bottom: 2px solid #C2C2C2;
+	display: inline-block;
+	padding: 0 5px;
+	padding-bottom: 5px;
+	font-weight: normal;
+}
+.table thead > tr > th > a span {
+	color: #344644;
+}
+.table thead > tr > th > a span:after {
+	content: "\f0dc";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: inherit;
+	margin-left: 5px;
+	font-size: 0.75em;
+}
+.table thead > tr > th > a.asc span:after {
+	content: "\f0dd";
+}
+.table thead > tr > th > a.desc span:after {
+	content: "\f0de";
+}
+.table thead > tr > th > a:hover span {
+	text-decoration: none;
+	color: #2bb6a3;
+	border-color: #2bb6a3;
+}
+.table.table-hover tbody > tr > td {
+	-webkit-transition: background-color 0.15s ease-in-out 0s;
+	transition: background-color 0.15s ease-in-out 0s;
+}
+.table tbody tr td .call-type {
+	display: block;
+	font-size: 0.75em;
+	text-align: center;
+}
+.table tbody tr td .first-line {
+	line-height: 1.5;
+	font-weight: 400;
+	font-size: 1.125em;
+}
+.table tbody tr td .first-line span {
+	font-size: 0.875em;
+	color: #969696;
+	font-weight: 300;
+}
+.table tbody tr td .second-line {
+	font-size: 0.875em;
+	line-height: 1.2;
+}
+.table a.table-link {
+	margin: 0 5px;
+	font-size: 1.125em;
+}
+.table a.table-link:hover {
+	text-decoration: none;
+	color: #2aa493;
+}
+.table a.table-link.danger {
+	color: #fe635f;
+}
+.table a.table-link.danger:hover {
+	color: #dd504c;
+}
+
+.table-products tbody > tr > td {
+	background: none;
+	border: none;
+	border-bottom: 1px solid #ebebeb;
+	-webkit-transition: background-color 0.15s ease-in-out 0s;
+	transition: background-color 0.15s ease-in-out 0s;
+	position: relative;
+}
+.table-products tbody > tr:hover > td {
+	text-decoration: none;
+	background-color: #f6f6f6;
+}
+.table-products .name {
+	display: block;
+	font-weight: 600;
+	padding-bottom: 7px;
+}
+.table-products .price {
+	display: block;
+	text-decoration: none;
+	width: 50%;
+	float: left;
+	font-size: 0.875em;
+}
+.table-products .price > i {
+	color: #8dc859;
+}
+.table-products .warranty {
+	display: block;
+	text-decoration: none;
+	width: 50%;
+	float: left;
+	font-size: 0.875em;
+}
+.table-products .warranty > i {
+	color: #f1c40f;
+}
+.table tbody > tr.table-line-fb > td {
+	background-color: #9daccb;
+	color: #262525;
+}
+.table tbody > tr.table-line-twitter > td {
+	background-color: #9fccff;
+	color: #262525;
+}
+.table tbody > tr.table-line-plus > td {
+	background-color: #eea59c;
+	color: #262525;
+}
+.table-stats .status-social-icon {
+	font-size: 1.9em;
+	vertical-align: bottom;
+}
+.table-stats .table-line-fb .status-social-icon {
+	color: #556484;
+}
+.table-stats .table-line-twitter .status-social-icon {
+	color: #5885b8;
+}
+.table-stats .table-line-plus .status-social-icon {
+	color: #a75d54;
+}
+</style>
