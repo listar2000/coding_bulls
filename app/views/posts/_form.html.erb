@@ -25,9 +25,9 @@
     <%= form.text_field :category_id, class: "form-control hidden", id: "content-form" %>
   </div>
 
-  <div class="new-post-field">
+  <div class="new-post-field img-div">
     <span class="input-group-addon" id="basic-addon1">Choose File</span>
-    <%= form.file_field :image, accept: "image/png,image/gif,image/jpeg", class: "form-control" %>
+    <%= form.file_field :image, accept: "image/png,image/gif,image/jpeg", class: "form-control file-upload" %>
   </div>
 
   <div class="category-list">
@@ -94,6 +94,9 @@
     border-color: #5cb85c;
     color: white;
   }
+  .img-preview {
+    margin-top: 7px;
+  }
   textarea {
     /* margin:0px 0px; this is redundant anyways since its specified below*/
     padding-top:10px;
@@ -152,5 +155,22 @@
           console.log(data.name)
         }
     });
+  })
+  $('.file-upload').on('change', function readURL(e) {
+    if (this.files && this.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        if ($(".img-preview").length == 0) {
+          var $img = $("<img>", {src: e.target.result, "class": "img-preview"})
+          $(".img-div").append($img)
+        }
+        else {
+          $(".img-preview").attr('src', e.target.result)
+        }
+      };
+
+      reader.readAsDataURL(this.files[0]);
+    }
   })
 </script>

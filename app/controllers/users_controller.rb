@@ -33,4 +33,10 @@ class UsersController < ApplicationController
         flash[:danger] = "You have removed #{Post.find(params[:id]).caption} from your Dashboard"
         redirect_to request.referer
     end
+
+    def profile
+        @user = User.find(params[:id])
+        @posts = Post.where(user: @user).limit(5)
+        @fans = @user.follow_me.map {|x| x.follower }
+    end
 end

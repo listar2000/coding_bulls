@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   delete "/users/:id/unadds", to: "users#unadds", as: "unadds"
   delete "/users/:id/unlike", to: "users#unfollow", as: "unfollow"
   get "/users/:id/dashboard", to: "users#dashboard", as: "user_dashboard"
+  get "/users/:id/profile", to: "users#profile", as: "user_profile"
 
   # the routes for category_controller
   get "/categories", to: "categories#index", as: "categories"
@@ -25,3 +26,5 @@ Rails.application.routes.draw do
 
   root :to => 'welcome#index'
 end
+
+
