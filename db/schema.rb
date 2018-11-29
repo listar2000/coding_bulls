@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_27_074021) do
+ActiveRecord::Schema.define(version: 2018_11_29_104610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,8 @@ ActiveRecord::Schema.define(version: 2018_11_27_074021) do
     t.index ["post_id"], name: "index_dashboard_and_posts_on_post_id"
     t.index ["workspace_id"], name: "index_dashboard_and_posts_on_workspace_id"
   end
- create_table "follows", force: :cascade do |t|
+
+  create_table "follows", force: :cascade do |t|
     t.bigint "follower_id"
     t.bigint "followed_id"
     t.datetime "created_at", null: false
@@ -98,14 +99,23 @@ ActiveRecord::Schema.define(version: 2018_11_27_074021) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.integer "type"
+    t.integer "usertype"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "workspaces", force: :cascade do |t|
+    t.text "caption"
+    t.text "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "adds", "posts"
   add_foreign_key "adds", "users"
   add_foreign_key "categories", "users"
+  add_foreign_key "dashboard_and_posts", "posts"
+  add_foreign_key "dashboard_and_posts", "workspaces"
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "posts", "categories"
